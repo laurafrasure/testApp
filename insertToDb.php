@@ -12,11 +12,11 @@
 	$VehicleMake = $VehicleModel = $StartDate = $EndDate = $NameOfEmployees = NULL;
 
 	// Get input variables
-	$VehicleMake= (varchar(255)) ($_POST['Vehicle_Make']);
-	$VehicleModel= (varchar(255)) ($_POST['Vehicle_Model']);
-	$StartDate= (date) ($_POST['Start_Date']);
-	$EndDate= (date) ($_POST['End_Date']);
-	$NameOfEmployees= (varchar(255)) ($_POST['Name_Of_Employees']);
+	$VehicleMake= ($_POST['Vehicle_Make']);
+	$VehicleModel=  ($_POST['Vehicle_Model']);
+	$StartDate=  ($_POST['Start_Date']);
+	$EndDate=  ($_POST['End_Date']);
+	$NameOfEmployees=  ($_POST['Name_Of_Employees']);
 
 	// Get the authentication claims stored in the Token Store after user logins using Azure Active Directory
 	$claims= json_decode($_SERVER['MS_CLIENT_PRINCIPAL'])->claims;
