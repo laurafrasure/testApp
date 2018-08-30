@@ -57,7 +57,8 @@
 				EndDate,
 				NameOfEmployees,
 				)
-		VALUES ('" . $VehicleMake . "',
+		VALUES ('" . $userEmail . "',
+				'" . $VehicleMake . "',
 				'" . $VehicleModel . "', 
 				'" . $StartDate . "', 
 				'" . $EndDate . "', 
