@@ -25,7 +25,7 @@
 	require 'connectToDatabase.php';
 
 	// Connect to Azure SQL Database
-	$conn = ConnectToDabase();
+	$conn = ConnectToDatabase();
 
 	// Get the session data from the previously selected Expense Month, if it exists
 	session_start();
