@@ -22,15 +22,14 @@
 	session_start();
 
 	// Define ariables and set to empty values
-	$expenseDay = $expenseMonth = $expenseYear = $expenseAmount = $expenseNote = $expenseCategory = $errorMessage = NULL;
+	$VehicleMake = $VehicleModel = $StartDate = $EndDate = $NameOfEmployees = NULL;
 
 	// Get input variables
-	$expenseDay= (int) parse_input($_POST['expense_day']);
-	$expenseMonth= (int) parse_input($_POST['expense_month']);
-	$expenseYear= (int) parse_input($_POST['expense_year']);
-	$expenseAmount= (float) parse_input($_POST['expense_amount']);
-	$expenseNote= parse_input($_POST['input_note']);
-	$expenseCategory= parse_input($_POST['expense_category']);
+	$VehicleMake= (varchar(255)) parse_input($_POST['Vehicle_Make']);
+	$VehicleModel= (varchar(255)) parse_input($_POST['Vehicle_Model']);
+	$StartDate= (date) parse_input($_POST['Start_Date']);
+	$EndDate= (date) parse_input($_POST['End_Date']);
+	$NameOfEmployees= (varchar(255)) parse_input($_POST['Name_Of_Employees']);
 
 	// Get the authentication claims stored in the Token Store after user logins using Azure Active Directory
 	$claims= json_decode($_SERVER['MS_CLIENT_PRINCIPAL'])->claims;
@@ -48,18 +47,7 @@
 	///////////////////////////////////////////////////////
 
 	//Initialize variable to keep track of any errors
-	$anyErrors= FALSE;
-
-	// Check category validity
-	if ($expenseCategory == '-1') {$errorMessage= "Error: Invalid Category Selected"; $anyErrors= TRUE;}
-	
-	// Check date validity
-	$isValidDate= checkdate($expenseMonth, $expenseDay, $expenseYear);
-	if (!$isValidDate) {$errorMessage= "Error: Invalid Date"; $anyErrors= TRUE;}
-
-	// Check that the expense amount input has maximum of 2 decimal places (check against string input, not the float parsed input)
-	$isValidExpenseAmount= validateTwoDecimals(parse_input($_POST['expense_amount']));
-	if (!$isValidExpenseAmount) {$errorMessage= "Error: Invalid Expense Amount"; $anyErrors= TRUE;}
+	$anyErrors= TRUE;
 
 
 	///////////////////////////////////////////////////////
@@ -85,25 +73,18 @@
 
 		// Build SQL query to insert new expense data into SQL database
 		$tsql=
-		"INSERT INTO Expenses (	
-				UserName,
-				ExpenseDay,
-				ExpenseDayOfWeek,
-				ExpenseMonth,
-				ExpenseMonthName,
-				ExpenseYear,
-				ExpenseCategory,
-				ExpenseAmount,
-				Notes)
-		VALUES ('" . $userEmail . "',
-				'" . $expenseDay . "', 
-				'" . $expenseDayOfWeek . "', 
-				'" . $expenseMonth . "', 
-				'" . $expenseMonthName . "', 
-				'" . $expenseYear . "', 
-				'" . $expenseCategory . "', 
-				'" . $expenseAmount . "', 
-				'" . $expenseNote . "')";
+		"INSERT INTO SangriaWine (	
+				VehicleMake,
+				VehicleModel,
+				StartDate,
+				EndDate,
+				NameOfEmployees,
+				)
+		VALUES ('" . $VehicleMake . "',
+				'" . $VehicleModel . "', 
+				'" . $StartDate . "', 
+				'" . $EndDate . "', 
+				'" . $NameOfEmployees . "')";
 
 		// Run query
 		$sqlQueryStatus= sqlsrv_query($conn, $tsql);
@@ -116,13 +97,11 @@
 	$prevSelections = array();
 
 	// Populate array with key-value pairs
-	$prevSelections['errorMessage']= $errorMessage;
-	$prevSelections['prevExpenseDay']= $expenseDay;
-	$prevSelections['prevExpenseMonth']= $expenseMonth;
-	$prevSelections['prevExpenseYear']= $expenseYear;
-	$prevSelections['prevExpenseCategory']= $expenseCategory;
-	$prevSelections['prevExpenseAmount']= $expenseAmount;
-	$prevSelections['prevExpenseNote']= $expenseNote;
+	$prevSelections['prevVehicleMake']= $VehicleMake;
+	$prevSelections['prevVehicleModel']= $VehicleModel;
+	$prevSelections['prevStartDate']= $StartDate;
+	$prevSelections['prevEndDate']= $EndDate;
+	$prevSelections['prevNameOfEmployee']= $NameOfEmployees;
 
 	// Store previously-selected data as part of info to carry over after URL redirection
 	$_SESSION['prevSelections'] = $prevSelections;
