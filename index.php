@@ -52,7 +52,7 @@ The PHP script insertToDb.php will be executed after the user clicks "Submit"-->
 	<form action="insertToDb.php" method="post">
 
 		<label>Vehicle Date (1-31):</label>
-		<input type="date" step="1" name="End_Date" required>
+		<input type="text" name="End_Date" required>
 
 		<!-- Text input for make, remembering previously selected make -->
 		<label>Vehicle Make:</label>

@@ -57,16 +57,6 @@
 	// Only input information into database if there are no errors
 	if ( !$anyErrors ) 
 	{
-		// Create a DateTime object based on inputted data
-		$dateObj= DateTime::createFromFormat('Y-m-d', $expenseYear . "-" . $expenseMonth . "-" . $expenseDay);
-
-		// Get the name of the month (e.g. January) of this expense
-		$expenseMonthName= $dateObj->format('F');
-
-		// Get the day of the week (e.g. Tuesday) of this expense
-		$expenseDayOfWeekNum= $dateObj->format('w');
-		$days = array('Sunday', 'Monday', 'Tuesday', 'Wednesday','Thursday','Friday', 'Saturday');
-		$expenseDayOfWeek = $days[$expenseDayOfWeekNum];
 
 		// Connect to Azure SQL Database
 		$conn = ConnectToDabase();
