@@ -1,19 +1,6 @@
 <?php
 
-	// Define function to handle basic user input
-	function parse_input($data) 
-	{
-		$data = trim($data);
-		$data = stripslashes($data);
-		$data = htmlspecialchars($data);
-		return $data;
-	}
 
-	// Define function to check that inputted expense number has a maximum of 2 decimal places
-	function validateTwoDecimals($number)
-	{
-	   return (preg_match('/^[0-9]+(\.[0-9]{1,2})?$/', $number));
-	}
  
 	// PHP script used to connect to backend Azure SQL database
 	require 'ConnectToDatabase.php';
@@ -25,11 +12,11 @@
 	$VehicleMake = $VehicleModel = $StartDate = $EndDate = $NameOfEmployees = NULL;
 
 	// Get input variables
-	$VehicleMake= (varchar(255)) parse_input($_POST['Vehicle_Make']);
-	$VehicleModel= (varchar(255)) parse_input($_POST['Vehicle_Model']);
-	$StartDate= (date) parse_input($_POST['Start_Date']);
-	$EndDate= (date) parse_input($_POST['End_Date']);
-	$NameOfEmployees= (varchar(255)) parse_input($_POST['Name_Of_Employees']);
+	$VehicleMake= (varchar(255)) ($_POST['Vehicle_Make']);
+	$VehicleModel= (varchar(255)) ($_POST['Vehicle_Model']);
+	$StartDate= (date) ($_POST['Start_Date']);
+	$EndDate= (date) ($_POST['End_Date']);
+	$NameOfEmployees= (varchar(255)) ($_POST['Name_Of_Employees']);
 
 	// Get the authentication claims stored in the Token Store after user logins using Azure Active Directory
 	$claims= json_decode($_SERVER['MS_CLIENT_PRINCIPAL'])->claims;
