@@ -1,6 +1,6 @@
 <?php
 
-function ConnectToDabase()
+function ConnectToDatabase()
 {
 	/* Get environment variables (defined in Azure App Service Settings) for Azure SQL Database connection */
 	/* Further info: https://docs.microsoft.com/en-us/azure/app-service-web/web-sites-configure#application-settings */
