@@ -8,7 +8,7 @@
 	// Start session for this particular PHP script execution.
 	session_start();
 
-	// Define ariables and set to empty values
+	// Define variables and set to empty values
 	$VehicleMake = $VehicleModel = $StartDate = $EndDate = $NameOfEmployees = NULL;
 
 	// Get input variables
@@ -42,7 +42,7 @@
 	///////////////////////////////////////////////////////
 
 	// Only input information into database if there are no errors
-	if ( !$anyErrors ) 
+	if ( $anyErrors ) 
 	{
 
 		// Connect to Azure SQL Database
